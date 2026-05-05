@@ -19,7 +19,7 @@ describe("game_plugin", () => {
 
 		const player_pos = h.world.query([pos_c, player_c] as const).collect();
 		expect(player_pos.length).toBe(1);
-		expect(player_pos[0]![1].x).toBeGreaterThan(320);
+		expect(player_pos[0]![1].x).toBeGreaterThan(40);
 
 		const score = h.res.get(score_r);
 		expect(score.ok).toBe(true);

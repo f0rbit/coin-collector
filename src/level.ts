@@ -3,9 +3,9 @@ import { pos_c } from "@f0rbit/forge";
 import { coin_c, player_c, vel_c } from "./components.ts";
 import { score_r } from "./resources.ts";
 
-export const player_start = { x: 320, y: 240 } as const;
-export const coin_xs = [400, 460, 520, 580, 620] as const;
-export const coin_y = 240 as const;
+export const player_start = { x: 40, y: 90 } as const;
+export const coin_xs = [120, 160, 200, 240, 280] as const;
+export const coin_y = 90 as const;
 
 export const setup: System = (w, ctx) => {
 	if (!ctx.res.has(score_r)) ctx.res.set(score_r, { value: 0 });

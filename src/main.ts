@@ -7,20 +7,23 @@ import { game_plugin } from "./plugin.ts";
 const main = async (): Promise<void> => {
 	const r = await boot({
 		mount: "#root",
-		width: 640,
-		height: 480,
-		background: 0x101018,
+		window: { width: globalThis.innerWidth, height: globalThis.innerHeight },
+		camera: {
+			design: { width: 320, height: 180 },
+			mode: "extend",
+			min: { width: 320, height: 180 },
+		},
 		bindings: presets.movement2d,
 	});
 	if (!r.ok) {
 		console.error("boot failed", r.error);
 		return;
 	}
-	const { world, schedule, start } = r.value;
+	const app = r.value;
 
-	game_plugin(world, schedule);
+	game_plugin(app.world, app.schedule);
 
-	schedule.add("post", w => {
+	app.schedule.add("post", w => {
 		for (const [id] of w.query([pos_c, player_c] as const)) {
 			if (!w.has(id, sprite_c)) {
 				w.set(id, sprite_c, { texture: "__default__", frame: "__default_0__", anchor: { x: 0.5, y: 0.5 } });
@@ -33,7 +36,11 @@ const main = async (): Promise<void> => {
 		}
 	}, "coin.sprites");
 
-	start();
+	globalThis.addEventListener("resize", () => {
+		app.render.resize(globalThis.innerWidth, globalThis.innerHeight);
+	});
+
+	app.start();
 };
 
 main();

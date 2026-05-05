@@ -2,7 +2,7 @@ import type { System } from "@f0rbit/forge";
 import { pos_c } from "@f0rbit/forge";
 import { player_c, vel_c } from "../components.ts";
 
-const speed = 240;
+const speed = 80;
 
 export const player_input_system: System = (w, ctx) => {
 	const [ax, ay] = ctx.input.vector("move.x", "move.y");

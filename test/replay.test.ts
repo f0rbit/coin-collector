@@ -32,7 +32,7 @@ const hash_world = (w: World, score: number): string => {
 	return `p=${players}|c=${coins}|s=${score}`;
 };
 
-const tick_count = 80;
+const tick_count = 200;
 
 describe("replay deliverable", () => {
 	test("loaded replay JSON parses cleanly", () => {

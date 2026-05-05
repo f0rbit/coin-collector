@@ -3,7 +3,7 @@ import { pos_c } from "@f0rbit/forge";
 import { coin_c, player_c } from "../components.ts";
 import { score_r } from "../resources.ts";
 
-const pickup_radius = 32;
+const pickup_radius = 8;
 const radius_sq = pickup_radius * pickup_radius;
 
 // .collect() snapshots the coin set before despawning. See Query<C> doc on @f0rbit/forge — mutating the world during a live iterator is unsafe.
