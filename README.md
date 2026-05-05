@@ -1,24 +1,14 @@
 # coin-collector
 
-First game built on `@f0rbit/forge`. A player moves around a 640x480 stage and collects 5 coins. Used as the API pressure-test for forge v0.1.0.
+A tiny game built on [`@f0rbit/forge`](https://www.npmjs.com/package/@f0rbit/forge). Move the player around a 640x480 stage and collect 5 coins. Doubles as the API pressure-test for forge v0.1.0.
+
+**Play it live:** https://f0rbit.github.io/coin-collector/
 
 ## Setup
 
-forge is consumed via `bun link` during dev — it isn't published yet.
-
 ```sh
-# one-time, in the forge repo
-cd ~/dev/forge
-bun run build      # exports point at dist/, must be built
-bun link
-
-# in this repo
-cd ~/dev/coin-collector
-bun link @f0rbit/forge
 bun install
 ```
-
-Whenever forge source changes, re-run `bun run build` in the forge repo so the linked `dist/` is up to date.
 
 ## Scripts
 
