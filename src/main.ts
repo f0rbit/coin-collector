@@ -23,12 +23,12 @@ const main = async (): Promise<void> => {
 	schedule.add("post", w => {
 		for (const [id] of w.query([pos_c, player_c] as const)) {
 			if (!w.has(id, sprite_c)) {
-				w.set(id, sprite_c, { texture: "__default__", frame: "0" });
+				w.set(id, sprite_c, { texture: "__default__", frame: "__default_0__", anchor: { x: 0.5, y: 0.5 } });
 			}
 		}
 		for (const [id] of w.query([pos_c, coin_c] as const)) {
 			if (!w.has(id, sprite_c)) {
-				w.set(id, sprite_c, { texture: "__default__", frame: "1" });
+				w.set(id, sprite_c, { texture: "__default__", frame: "__default_1__", anchor: { x: 0.5, y: 0.5 } });
 			}
 		}
 	}, "coin.sprites");
