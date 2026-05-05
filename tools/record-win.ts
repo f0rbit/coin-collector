@@ -1,0 +1,59 @@
+import { writeFileSync } from "node:fs";
+import { debug_noop, input, palette_noop, replay, rng, resources, schedule, time, world } from "@f0rbit/forge";
+import type { Ctx } from "@f0rbit/forge";
+import { presets } from "@f0rbit/forge/presets";
+import { game_plugin } from "../src/plugin.ts";
+import { score_r } from "../src/resources.ts";
+
+const seed = 1;
+const fixed_dt = 1 / 60;
+const max_ticks = 600;
+
+const w = world();
+const sch = schedule();
+const t = time({ fixed_dt });
+const r = rng(seed);
+const res = resources();
+const inp = input(presets.movement2d);
+const ctx: Ctx = {
+	time: t,
+	rng: r,
+	res,
+	input: inp,
+	debug: debug_noop(),
+	palette: palette_noop(),
+};
+
+const recorder = replay.record(inp, { seed, fixed_dt, get_tick: () => t.tick });
+
+game_plugin(w, sch);
+
+inp.inject_actions([{ kind: "axis", action: "move.x", value: 1 }]);
+
+let win_tick = -1;
+for (let i = 0; i < max_ticks; i++) {
+	t.advance(fixed_dt);
+	sch.tick(w, ctx);
+	const s = res.get(score_r);
+	if (s.ok && s.value.value >= 50) {
+		win_tick = t.tick;
+		break;
+	}
+}
+
+if (win_tick === -1) {
+	console.error("did not reach win condition within", max_ticks, "ticks");
+	process.exit(1);
+}
+
+inp.inject_actions([{ kind: "axis", action: "move.x", value: 0 }]);
+t.advance(fixed_dt);
+sch.tick(w, ctx);
+
+const doc = recorder.stop();
+const json = replay.save(doc);
+
+const out_path = new URL("../replays/win.replay.json", import.meta.url).pathname;
+writeFileSync(out_path, json + "\n");
+
+console.log(`recorded ${doc.frames.length} frames over ${win_tick} ticks -> ${out_path}`);
