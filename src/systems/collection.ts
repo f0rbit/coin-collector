@@ -6,6 +6,7 @@ import { score_r } from "../resources.ts";
 const pickup_radius = 32;
 const radius_sq = pickup_radius * pickup_radius;
 
+// .collect() snapshots the coin set before despawning. See Query<C> doc on @f0rbit/forge — mutating the world during a live iterator is unsafe.
 export const collection_system: System = (w, ctx) => {
 	const players = w.query([pos_c, player_c] as const).collect();
 	if (players.length === 0) return;

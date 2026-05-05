@@ -1,16 +1,6 @@
 import { readFileSync } from "node:fs";
 import { describe, expect, test } from "bun:test";
-import {
-	debug_noop,
-	input,
-	palette_noop,
-	replay,
-	rng,
-	resources,
-	schedule,
-	time,
-	world,
-} from "@f0rbit/forge";
+import { harness, replay } from "@f0rbit/forge";
 import type { Ctx, ReplayDoc, World } from "@f0rbit/forge";
 import { presets } from "@f0rbit/forge/presets";
 import { coin_c, player_c } from "../src/components.ts";
@@ -23,28 +13,15 @@ const replay_json = readFileSync(replay_path, "utf8");
 type Sim = { ctx: Ctx; w: World; tick: () => void };
 
 const make_sim = (doc: ReplayDoc): Sim => {
-	const w = world();
-	const sch = schedule();
-	const t = time({ fixed_dt: doc.fixed_dt });
-	const r = rng(doc.seed);
-	const res = resources();
-	const inp = input(presets.movement2d);
-	const ctx: Ctx = {
-		time: t,
-		rng: r,
-		res,
-		input: inp,
-		debug: debug_noop(),
-		palette: palette_noop(),
-	};
-	game_plugin(w, sch);
-	replay.play(doc, inp, () => t.tick);
+	const h = harness({ seed: doc.seed, fixed_dt: doc.fixed_dt, bindings: presets.movement2d });
+	game_plugin(h.world, h.schedule);
+	replay.play(doc, h.input, () => h.time.tick);
 	return {
-		ctx,
-		w,
+		ctx: h.ctx,
+		w: h.world,
 		tick: () => {
-			t.advance(doc.fixed_dt);
-			sch.tick(w, ctx);
+			h.time.advance(doc.fixed_dt);
+			h.schedule.tick(h.world, h.ctx);
 		},
 	};
 };
