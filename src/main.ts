@@ -13,7 +13,7 @@ const main = async (): Promise<void> => {
 			mode: "extend",
 			min: { width: 320, height: 180 },
 		},
-		bindings: presets.movement2d,
+		bindings: presets.movement_2d,
 	});
 	if (!r.ok) {
 		console.error("boot failed", r.error);

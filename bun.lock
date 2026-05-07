@@ -6,7 +6,7 @@
       "name": "coin-collector",
       "dependencies": {
         "@f0rbit/corpus": "^0.3.5",
-        "@f0rbit/forge": "^0.2.0",
+        "@f0rbit/forge": "^0.3.0",
         "pixi.js": "^8",
         "zod": "^3.25.0",
       },
@@ -19,7 +19,7 @@
   "packages": {
     "@f0rbit/corpus": ["@f0rbit/corpus@0.3.5", "", { "dependencies": { "drizzle-orm": "^0.44.7" }, "peerDependencies": { "typescript": "^5", "zod": "^3" } }, "sha512-G7bg9VroEiGnuyrZPOPQ51sTWx1ryyOXrHwN8sC43NraTY5xeUfaR11CSoOB43UJGFTwGovMulRxssMhcWznxw=="],
 
-    "@f0rbit/forge": ["@f0rbit/forge@0.2.0", "", { "dependencies": { "@f0rbit/corpus": "^0.3.5", "zod": "^3.25.0" }, "peerDependencies": { "pixi.js": "^8" }, "optionalPeers": ["pixi.js"] }, "sha512-koYfmoHXt7GBP7YfIo1YQiQrRx46IvBuQlAyipoC7hJiTDRC5Z7YC4OkWolQlCypbHVo0xT34gDi1M6tSg8ISQ=="],
+    "@f0rbit/forge": ["@f0rbit/forge@0.3.0", "", { "dependencies": { "@f0rbit/corpus": "^0.3.5", "zod": "^3.25.0" }, "peerDependencies": { "pixi.js": "^8" }, "optionalPeers": ["pixi.js"] }, "sha512-re7xJVY1V8WmsfY6JQk7s8Zy9WCdOLU1kxnmBeNAP7RcnmIRSB9d8riqcmOghfSh9Kw7+IuSUFpQZ/7QuJ1rIQ=="],
 
     "@pixi/colord": ["@pixi/colord@2.9.6", "", {}, "sha512-nezytU2pw587fQstUu1AsJZDVEynjskwOL+kibwcdxsMBFqPsFFNA7xl0ii/gXuDi6M0xj3mfRJj8pBSc2jCfA=="],
 

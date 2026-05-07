@@ -7,7 +7,7 @@ import { score_r } from "../src/resources.ts";
 
 describe("game_plugin", () => {
 	test("player input drives movement and collects coins", () => {
-		const h = harness({ bindings: presets.movement2d });
+		const h = harness({ bindings: presets.movement_2d });
 		game_plugin(h.world, h.schedule);
 
 		h.input.inject_actions([{ kind: "axis", action: "move.x", value: 1 }]);

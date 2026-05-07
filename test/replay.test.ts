@@ -13,7 +13,7 @@ const replay_json = readFileSync(replay_path, "utf8");
 type Sim = { ctx: Ctx; w: World; tick: () => void };
 
 const make_sim = (doc: ReplayDoc): Sim => {
-	const h = harness({ seed: doc.seed, fixed_dt: doc.fixed_dt, bindings: presets.movement2d });
+	const h = harness({ seed: doc.seed, fixed_dt: doc.fixed_dt, bindings: presets.movement_2d });
 	game_plugin(h.world, h.schedule);
 	replay.play(doc, h.input, () => h.time.tick);
 	return {

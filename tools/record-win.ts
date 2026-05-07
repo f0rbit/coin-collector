@@ -8,8 +8,8 @@ const seed = 1;
 const fixed_dt = 1 / 60;
 const max_ticks = 600;
 
-const h = harness({ seed, fixed_dt, bindings: presets.movement2d });
-const recorder = replay.record_engine(h.input, h.ctx, { seed });
+const h = harness({ seed, fixed_dt, bindings: presets.movement_2d });
+const recorder = replay.record(h.input, h.ctx, { seed });
 
 game_plugin(h.world, h.schedule);
 
